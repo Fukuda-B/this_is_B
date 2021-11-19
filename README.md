@@ -4,4 +4,4 @@
 
 | file | description |
 | ---- | ---- | 
-| how_to_print_unicode_B.py | A very simple example of converting B to Unicode |
+| [how_to_print_unicode_B.py](./how_to_print_unicode_B.py) | A very simple example of converting B to Unicode |
