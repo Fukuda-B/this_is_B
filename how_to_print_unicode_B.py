@@ -11,4 +11,4 @@ B = [
     "🅑",            "🅱",
     "Ƀ","Ɓ","Ƃ","Ḃ","𝕭",
 ]
-[print(f"{B[i]}{'  ' if unicodedata.east_asian_width(B[i]) == 'F' else '   '}{format(ord(B[i]), '#08x')}") for i in range(len(B))]
+[print(f"{B[b]}{'  ' if unicodedata.east_asian_width(B[b]) == 'F' else '   '}{format(ord(B[b]), '#08x')}") for b in range(len(B))]
