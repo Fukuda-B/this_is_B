@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other
+tettette-_loop_.wav
+tettette-_short_.wav
