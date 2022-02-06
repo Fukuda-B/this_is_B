@@ -1,3 +1,4 @@
+// get window size
 #packopt type 0
 #packopt hide 0
 #packopt name "b"
@@ -19,11 +20,11 @@ SetLayeredWindowAttributes hwnd, 0, 200, ULW_ALPHA
 oncmd gosub *r, WM_SIZE
 onclick *m
 stop
-*r
+*r // resize
 	SetWindowPos hMesbox, 0, 0, 0, ginfo_winx, ginfo_winy, 0
 	color 255, 255, 255: boxf 0, 0, ginfo_sizex, ginfo_sizey
 	color 0, 0, 0: pos 0,0: mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
 	return
-*m
+*m // move
 	if wparam == 1 :sendmsg hwnd,WM_NCLBUTTONDOWN,HTCAPTION,0
 	stop
