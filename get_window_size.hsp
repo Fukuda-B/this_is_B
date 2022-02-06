@@ -17,6 +17,7 @@ SetWindowLong hwnd, -16, stat | WS_THICKFRAME | WS_MAXIMIZEBOX
 GetWindowLong hwnd, -20
 SetWindowLong hwnd, -20, stat | WS_EX_LAYERED
 SetLayeredWindowAttributes hwnd, 0, 200, ULW_ALPHA
+mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
 oncmd gosub *r, WM_SIZE
 onclick *m
 stop
