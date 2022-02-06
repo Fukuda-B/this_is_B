@@ -1,0 +1,29 @@
+#packopt type 0
+#packopt hide 0
+#packopt name "b"
+#include "user32.as"
+#define WM_SIZE	0x00005
+#define WM_NCLBUTTONDOWN $000000A1
+#define WS_THICKFRAME	0x40000
+#define WS_EX_LAYERED $80000
+#define HTCAPTION 2
+#define LWA_COLORKEY 1
+#define ULW_ALPHA 2
+
+bgscr 0, ginfo_dispx, ginfo_dispy: width 640, 480
+GetWindowLong hwnd, -16
+SetWindowLong hwnd, -16, stat | WS_THICKFRAME | WS_MAXIMIZEBOX
+GetWindowLong hwnd, -20
+SetWindowLong hwnd, -20, stat | WS_EX_LAYERED
+SetLayeredWindowAttributes hwnd, 0, 200, ULW_ALPHA
+oncmd gosub *r, WM_SIZE
+onclick *m
+stop
+*r
+	SetWindowPos hMesbox, 0, 0, 0, ginfo_winx, ginfo_winy, 0
+	color 255, 255, 255: boxf 0, 0, ginfo_sizex, ginfo_sizey
+	color 0, 0, 0: pos 0,0: mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
+	return
+*m
+	if wparam == 1 :sendmsg hwnd,WM_NCLBUTTONDOWN,HTCAPTION,0
+	stop
