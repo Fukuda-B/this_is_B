@@ -17,15 +17,26 @@ SetWindowLong hwnd, -16, stat | WS_THICKFRAME | WS_MAXIMIZEBOX
 GetWindowLong hwnd, -20
 SetWindowLong hwnd, -20, stat | WS_EX_LAYERED
 SetLayeredWindowAttributes hwnd, 0, 200, ULW_ALPHA
-mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
+color 48, 48, 48: boxf: color 255, 255, 255: mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
 oncmd gosub *r, WM_SIZE
 onclick *m
 stop
+
 *r // resize
 	SetWindowPos hMesbox, 0, 0, 0, ginfo_winx, ginfo_winy, 0
-	color 255, 255, 255: boxf 0, 0, ginfo_sizex, ginfo_sizey
-	color 0, 0, 0: pos 0,0: mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
+	gsx = ginfo_sizex
+	gsy = ginfo_sizey
+	// 11 = 0xB, 121 = B*B, 187 = 0xBB, 1011 = B
+	flg = 0
+	if (gsx==11 or gsx==121 or gsx==187 or gsx==1011 or gsx+gsy=1011) :flg++
+	if (gsy==11 or gsy==121 or gsy==187 or gsy==1011) :flg++
+
+	if (flg == 1): {color 0, 0, 200: boxf}
+	else: if (flg == 2): {color 200, 0, 0: boxf}
+	else: {color 48, 48, 48: boxf 0, 0, ginfo_sizex, ginfo_sizey}
+	color 255, 255, 255: pos 0,0: mes "x:"+ginfo_sizex+" y:"+ginfo_sizey
 	return
+
 *m // move
 	if wparam == 1 :sendmsg hwnd,WM_NCLBUTTONDOWN,HTCAPTION,0
 	stop
